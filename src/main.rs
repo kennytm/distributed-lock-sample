@@ -91,7 +91,7 @@ fn main() {
 
     let (mut prepare_lock_send, prepare_lock_recv) = mpsc::channel(0);
 
-    let _leaser_thread = spawn(move || run_leaser(client, prepare_lock_recv));
+    let leaser_thread = spawn(move || run_leaser(client, prepare_lock_recv));
 
     for i in 0..5 {
         println!("{:?} {} - acquire mutex to prepare", SystemTime::now(), i);
@@ -125,4 +125,5 @@ fn main() {
     }
 
     prepare_lock_send.send(LockTask::Revoke).wait().unwrap();
+    leaser_thread.join().unwrap();
 }
