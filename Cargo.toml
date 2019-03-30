@@ -1,0 +1,10 @@
+[package]
+name = "distributed-lock-sample"
+version = "0.1.0"
+authors = ["kennytm <kennytm@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+etcd-rs = { git = "https://github.com/kennytm/etcd-rs.git", branch = "lock-api" }
+futures = "0.1.23"
+tokio = "0.1.14"
